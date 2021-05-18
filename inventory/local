@@ -1,4 +1,4 @@
 
-[spawn_servers]
+[local]
 localhost  ansible_connection=local
 
