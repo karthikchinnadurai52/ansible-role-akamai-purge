@@ -2,10 +2,10 @@
 # defaults file for akamai_purge
 
 
-akamai_base_url: https://api.ccu.akamai.com
+akamai_base_url: https://control.akamai.com/apps/home-page/#/home     
 notify_team: ''
 
-akamai_userDomain: ''  # @example.com
+akamai_userDomain: 'arrow.com'  # @example.com
 akamai_credentials:
-  username: ''
-  password: ''
+  username: 'karthik.chinnadurai@arrow.com'
+  password: '18Digitspassword@2019'

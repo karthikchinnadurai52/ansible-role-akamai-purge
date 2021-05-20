@@ -1,4 +1,3 @@
 
-[spawn_servers]
-localhost  ansible_connection=local
-
+[local]
+uw1vminap001p ansible_host=10.241.140.10 ansible_password=27Digitspassword ansible_connection=psrp ansible_port=5895 ansible_user=karthik.chinnadurai ansible_winrm_serv$

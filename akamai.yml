@@ -1,9 +1,9 @@
 ---
 
 
-- hosts: spawn_servers
+- hosts: local
   gather_facts: False
-  connection: local
+  connection: psrp
   sudo: no
   roles:
     - { role: akamai_purge, akamai_user: "{{akamai_credentials.username}}", akamai_password: "{{akamai_credentials.password}}" }

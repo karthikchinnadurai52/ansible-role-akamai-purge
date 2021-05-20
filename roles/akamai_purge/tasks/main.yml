@@ -6,7 +6,6 @@
   include_vars: "../../../group_vars/global/team_profiles.yml"
   tags:
     - akamai_purge
-    - akamai_purge_arl
     - akamai_purge_cpcode
     - akamai_status
     - silent
@@ -17,7 +16,6 @@
     - httplib2 
   tags:
     - akamai_purge
-    - akamai_purge_arl
     - akamai_purge_cpcode
     - akamai_status
 
@@ -30,20 +28,7 @@
   tags:
     - akamai_status
     - akamai_purge
-    - akamai_purge_arl
     - akamai_purge_cpcode
-
-
-# Usage: ansible-playbook akamai.yml -i inventory/local --tags akamai_purge_arl -vv --extra-vars arl=http://www.example.com/graphics/picture.gif,http://www.example.com/documents/brochure.pdf
-- name: Submit ARL Purge Request
-  uri: url={{ akamai_base_url }}/ccu/v2/queues/{{ queue_name | default('default') }} method=POST return_content=yes
-       body='{"action":"{{ akamai_action | default('remove')}}","objects":["{{arl | replace(',','", "') }}"],"type":"arl"}'
-       status_code=201 HEADER_Content-Type="application/json"
-       user={{akamai_user}} password={{akamai_password}} force_basic_auth=yes
-  register: purge_request_response
-  when: arl is defined
-  tags:
-    - akamai_purge_arl
 
 # Usage: ansible-playbook akamai.yml -i inventory/local --tags akamai_purge_cpcode -vv --extra-vars cpcode=number,number1,number2
 - name: Submit CPCODE Purge Request
