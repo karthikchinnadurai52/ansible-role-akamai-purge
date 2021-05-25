@@ -19,7 +19,7 @@ This role uses akamai credentials to submit either ARL or CPCODE purges through 
   ansible-playbook akamai.yml -i inventory/local --tags akamai_purge_arl -vv --extra-vars arl=http://www.example.com/graphics/picture.gif,http://www.example.com/documents/brochure.pdf
   ```
 
-### To purge CPCODE's
+### To purge CPCODE
   ```bash
   ansible-playbook akamai.yml -i inventory/local --tags akamai_purge_cpcode --extra-vars cpcode=number,number1,number2
   ```
