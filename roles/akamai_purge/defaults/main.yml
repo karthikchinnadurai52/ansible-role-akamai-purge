@@ -2,7 +2,7 @@
 # defaults file for akamai_purge
 
 
-akamai_base_url: https://control.akamai.com/apps/home-page/#/home     
+akamai_base_url: https://control.akamai.com/apps/fast-purge/#/ccu-main
 notify_team: ''
 
 akamai_userDomain: 'arrow.com'  # @example.com

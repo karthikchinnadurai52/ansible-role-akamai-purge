@@ -11,18 +11,19 @@
     - silent
 
 - name: Install python dependency
-  pip: name={{item}} state=present
-  with_items:
-    - httplib2 
+  pip:
+    name: httplib2
+    state: latest
   tags:
     - akamai_purge
     - akamai_purge_cpcode
     - akamai_status
 
+
 # Usage: ansible-playbook akamai.yml -i inventory/local --tags akamai_status
 - name: Checking Queue Length
-  uri: url={{ akamai_base_url }}/ccu/v2/queues/{{ queue_name | default('default') }}
-       user={{akamai_user}} password={{akamai_password}} force_basic_auth=yes
+  uri: url={{ akamai_base_url }}
+       user="{{ akamai_user }}" password= "{{ akamai_password }}"  force_basic_auth=yes
        method=GET return_content=yes status_code=200
   register: queue_length_response
   tags:
@@ -31,13 +32,8 @@
     - akamai_purge_cpcode
 
 # Usage: ansible-playbook akamai.yml -i inventory/local --tags akamai_purge_cpcode -vv --extra-vars cpcode=number,number1,number2
-- name: Submit CPCODE Purge Request
-  uri: url={{ akamai_base_url }}/ccu/v2/queues/{{ queue_name | default('default') }} method=POST return_content=yes
-       body='{"action":"{{ akamai_action | default('remove')}}","objects":["{{ cpcode | replace(',','", "') }}"],"type":"cpcode"}'
-       status_code=201 HEADER_Content-Type="application/json"
-       user={{akamai_user}} password={{akamai_password}} force_basic_auth=yes
-  register: purge_request_response
-  when: cpcode is defined
+- name: Submit CPCODE Purge Reques
+  uri: url={{ akamai_base_url }} method=POST return_content=yes body='{"action":"{{ akamai_action | default('remove')}}","objects":["{{ cpcode | replace(',',',') }}"],"type":"cpcode"}'  status_code=201 headers_Content-Type="application/json" user={{akamai_user}} password={{akamai_password}} force_basic_auth=yes
   tags:
     - akamai_purge
     - akamai_purge_cpcode
@@ -124,7 +120,7 @@
     - queue_length_response.json
     - purge_request_response.json
     - purge_status_response.json
-  when: "{{item}} is defined"
+  when: 'item|string is defined'
   tags:
     - akamai_purge
     - akamai_purge_arl
