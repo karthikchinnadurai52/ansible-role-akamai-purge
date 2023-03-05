@@ -4,6 +4,7 @@
 - hosts: spawn_servers
   gather_facts: False
   connection: local
+  become: yes
   sudo: no
   vars_prompt:
     - name: "prompt_username"
